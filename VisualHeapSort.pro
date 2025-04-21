@@ -9,12 +9,14 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    codewidget.cpp \
     main.cpp \
     mainwidget.cpp \
     visualbar.cpp \
     visualtree.cpp
 
 HEADERS += \
+    codewidget.h \
     common.h \
     mainwidget.h \
     visualbar.h \

@@ -8,6 +8,7 @@
 #include <QVBoxLayout>
 #include <QStackedLayout>
 
-
+#include <QLabel>
+#include <QSizePolicy>
 
 #endif // COMMON_H
