@@ -1,0 +1,11 @@
+release/codewidget.o
+release/heapsort.o
+release/main.o
+release/mainwidget.o
+release/visualbar.o
+release/visualtree.o
+release/qrc_resources.o
+release/moc_codewidget.o
+release/moc_mainwidget.o
+release/moc_visualbar.o
+release/moc_visualtree.o

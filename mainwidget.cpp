@@ -14,7 +14,7 @@ MainWidget::MainWidget(QWidget *parent)
     animationLayout->addLayout(codeLayout);
 
     visualTree = new VisualTree();
-    visualTree->resize(1000, 1000);
+    visualTree->resize(500, 300);
     visualTreeArea->setWidget(visualTree);
 
     initCodeLayout();
@@ -23,6 +23,11 @@ MainWidget::MainWidget(QWidget *parent)
 }
 
 MainWidget::~MainWidget() {}
+
+void MainWidget::resizeEvent(QResizeEvent *event)
+{
+
+}
 
 void MainWidget::initCodeLayout()
 {
@@ -52,8 +57,6 @@ void MainWidget::initCodeLayout()
 
     dataWidget->setMinimumWidth(100);
     dataWidget->setMaximumWidth(200);
-    dataWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-
 
 }
 
@@ -64,6 +67,40 @@ void MainWidget::initController()
     controllerLayout = new QHBoxLayout();
     controllerWidget->setLayout(controllerLayout);
     controllerWidget->setMinimumHeight(80);
+    controllerLayout->setSpacing(10);
+
+    generateDataButton = new QPushButton("生成数据");
+    startSortButton = new QPushButton("开始排序");
+    stopAnimeButton = new QPushButton("停止动画");
+    stepByStepButton = new QPushButton("逐步排序");
+    resetButton = new QPushButton("重置");
+
+    QSize hugeButtonSize = QSize(100, 65), smallButtonSize = QSize(100, 30);
+
+
+    generateDataButton->resize(hugeButtonSize);
+    startSortButton->resize(hugeButtonSize);
+    stopAnimeButton->resize(hugeButtonSize);
+    stepByStepButton->resize(smallButtonSize);
+    resetButton->resize(smallButtonSize);
+
+    controllerLayout->setAlignment(Qt::AlignLeft);
+
+    generateDataButton->setMinimumSize(hugeButtonSize);
+    startSortButton->setMinimumSize(hugeButtonSize);
+    stopAnimeButton->setMinimumSize(hugeButtonSize);
+    stepByStepButton->setMinimumSize(smallButtonSize);
+    resetButton->setMinimumSize(smallButtonSize);
+
+    controllerLayout->addWidget(generateDataButton);
+    controllerLayout->addWidget(startSortButton);
+    controllerLayout->addWidget(stopAnimeButton);
+    fButtonLayout = new QVBoxLayout();
+    controllerLayout->addLayout(fButtonLayout);
+
+
+    fButtonLayout->addWidget(stepByStepButton);
+    fButtonLayout->addWidget(resetButton);
 }
 
 

@@ -10,7 +10,7 @@ class MainWidget : public QWidget
     Q_OBJECT
 
 private:
-    QVBoxLayout *mainLayout, *codeLayout, *visualCode, *visualData;
+    QVBoxLayout *mainLayout, *codeLayout, *visualCode, *visualData, *fButtonLayout;
     QHBoxLayout *animationLayout, *controllerLayout;
 
     QScrollArea *visualTreeArea;
@@ -21,12 +21,18 @@ private:
     CodeWIdget *codeWidget;//代码窗口
 
     QLabel *dataNum, *timeConsumed, *compareTimes, *swapTimes, *layersNum;
+
+    QPushButton *startSortButton, *stepByStepButton, *stopAnimeButton, *resetButton;
+    QPushButton *generateDataButton;
 public:
     MainWidget(QWidget *parent = nullptr);
     ~MainWidget();
+protected:
+    virtual void resizeEvent(QResizeEvent *event) override;
 
 private:
     void initCodeLayout();
     void initController();
+
 };
 #endif // MAINWIDGET_H

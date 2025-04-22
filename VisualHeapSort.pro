@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     codewidget.cpp \
+    heapsort.cpp \
     main.cpp \
     mainwidget.cpp \
     visualbar.cpp \
@@ -18,6 +19,7 @@ SOURCES += \
 HEADERS += \
     codewidget.h \
     common.h \
+    heapsort.h \
     mainwidget.h \
     visualbar.h \
     visualtree.h
@@ -26,3 +28,6 @@ HEADERS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resources.qrc

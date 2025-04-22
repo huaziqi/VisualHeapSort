@@ -241,7 +241,8 @@ Makefile: ../../VisualHeapSort.pro D:/Qt/6.5.3/mingw_64/mkspecs/win32-g++/qmake.
 		D:/Qt/6.5.3/mingw_64/lib/Qt6Gui.prl \
 		D:/Qt/6.5.3/mingw_64/lib/Qt6Core.prl \
 		D:/Qt/6.5.3/mingw_64/lib/Qt6EntryPoint.prl \
-		D:/Qt/6.5.3/mingw_64/mkspecs/features/build_pass.prf
+		D:/Qt/6.5.3/mingw_64/mkspecs/features/build_pass.prf \
+		../../resources.qrc
 	$(QMAKE) -o Makefile ..\..\VisualHeapSort.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 D:/Qt/6.5.3/mingw_64/mkspecs/features/spec_pre.prf:
 D:/Qt/6.5.3/mingw_64/mkspecs/features/device_config.prf:
@@ -415,6 +416,7 @@ D:/Qt/6.5.3/mingw_64/lib/Qt6Gui.prl:
 D:/Qt/6.5.3/mingw_64/lib/Qt6Core.prl:
 D:/Qt/6.5.3/mingw_64/lib/Qt6EntryPoint.prl:
 D:/Qt/6.5.3/mingw_64/mkspecs/features/build_pass.prf:
+../../resources.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\..\VisualHeapSort.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 

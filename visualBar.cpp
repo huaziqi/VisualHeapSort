@@ -2,4 +2,6 @@
 
 VisualBar::VisualBar(QWidget *parent)
     : QWidget{parent}
-{}
+{
+
+}
