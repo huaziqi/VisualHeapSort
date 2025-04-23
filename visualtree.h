@@ -1,13 +1,16 @@
 #ifndef VISUALTREE_H
 #define VISUALTREE_H
 
-#include <QWidget>
+#include "common.h"
 
 class VisualTree : public QWidget
 {
     Q_OBJECT
 public:
     explicit VisualTree(QWidget *parent = nullptr);
+
+protected:
+    void paintEvent(QPaintEvent *event);
 
 signals:
 };

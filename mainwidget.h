@@ -4,6 +4,7 @@
 #include "common.h"
 #include "visualTree.h"
 #include "codewidget.h"
+#include "heapsort.h"
 
 class MainWidget : public QWidget
 {
@@ -19,11 +20,14 @@ private:
     QWidget *controllerWidget; //控制窗口
     QWidget *dataWidget; //输出数据窗口
     CodeWIdget *codeWidget;//代码窗口
+    HeapSort *heapSort;
 
     QLabel *dataNum, *timeConsumed, *compareTimes, *swapTimes, *layersNum;
-
     QPushButton *startSortButton, *stepByStepButton, *stopAnimeButton, *resetButton;
     QPushButton *generateDataButton;
+
+
+    bool dataProvided = false;
 public:
     MainWidget(QWidget *parent = nullptr);
     ~MainWidget();
@@ -33,6 +37,10 @@ protected:
 private:
     void initCodeLayout();
     void initController();
+    int generateRandom();
+
+private slots:
+    void generateData();
 
 };
 #endif // MAINWIDGET_H

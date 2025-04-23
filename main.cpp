@@ -14,7 +14,7 @@ void loadStyle(){
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    loadStyle();
+    //loadStyle();
     MainWidget w;
     w.show();
     return a.exec();

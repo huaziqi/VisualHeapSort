@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QScrollArea>
+#include <QDialog>
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -13,9 +14,20 @@
 #include <QSizePolicy>
 
 #include <QPushButton>
+#include <QLineEdit>
+
 
 #include <QResizeEvent>
 #include <QSize>
 
 #include <QVector>
+
+#include <QPainter>
+#include <QScrollBar>
+
+#include <random>
+#include <QDesktopServices>
+#include <QFile>
+#include <QTextStream>
+
 #endif // COMMON_H

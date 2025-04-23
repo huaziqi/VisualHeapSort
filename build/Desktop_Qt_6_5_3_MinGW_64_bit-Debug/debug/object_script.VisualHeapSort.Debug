@@ -6,6 +6,7 @@ debug/visualbar.o
 debug/visualtree.o
 debug/qrc_resources.o
 debug/moc_codewidget.o
+debug/moc_heapsort.o
 debug/moc_mainwidget.o
 debug/moc_visualbar.o
 debug/moc_visualtree.o
