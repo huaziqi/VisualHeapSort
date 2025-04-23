@@ -15,8 +15,10 @@ private:
     void heapSortA();
     void down(int u, int v);
 
-private slots:
+public slots:
     void acceptData(const int& size, const QVector<int>& nums);
+signals:
+    void codesId(int codesId);
 
 signals:
 };

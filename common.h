@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QScrollArea>
 #include <QDialog>
+#include <QStringList>
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>

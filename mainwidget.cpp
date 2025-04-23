@@ -4,6 +4,7 @@
 MainWidget::MainWidget(QWidget *parent)
     : QWidget(parent)
 {
+    heapSort = new HeapSort();
     mainLayout = new QVBoxLayout(this);
     animationLayout = new QHBoxLayout();
     mainLayout->addLayout(animationLayout);
@@ -25,8 +26,6 @@ MainWidget::MainWidget(QWidget *parent)
     vScroll->setValue(2000);  // 垂直滚动到 y
     initCodeLayout();
     initController();
-    heapSort = new HeapSort();
-
 
 }
 
@@ -34,7 +33,7 @@ MainWidget::~MainWidget() {}
 
 void MainWidget::resizeEvent(QResizeEvent *event)
 {
-
+    QWidget::resizeEvent(event);
 }
 
 void MainWidget::initCodeLayout()
@@ -80,7 +79,7 @@ void MainWidget::initController()
     generateDataButton = new QPushButton("生成数据");
     startSortButton = new QPushButton("开始排序");
     stopAnimeButton = new QPushButton("停止动画");
-    stepByStepButton = new QPushButton("逐步排序");
+    stepByStepButton = new QPushButton("逐步执行");
     resetButton = new QPushButton("重置");
 
     QSize hugeButtonSize = QSize(100, 65), smallButtonSize = QSize(100, 30);
@@ -149,6 +148,8 @@ void MainWidget::generateData()
 
     mainLayout->setAlignment(Qt::AlignTop);
 
+    connect(this, &MainWidget::sendNums, heapSort, &HeapSort::acceptData);
+
     connect(confirmBtn, &QPushButton::clicked, this, [=]{
         int length = inputNums->text().toInt();
         QVector<int> nums;
@@ -160,6 +161,7 @@ void MainWidget::generateData()
                 nums.append(generateRandom());
                 out << nums[i] << " ";
             }
+            emit sendNums(length, nums);
             finishLabel->setText("数据生成完成");
             dataProvided = true;
             openFile->setDisabled(false);
@@ -172,7 +174,6 @@ void MainWidget::generateData()
 
     connect(openFile, &QPushButton::clicked, this, [=]{
         QUrl url = QUrl::fromLocalFile("data.txt");
-        qDebug() << url;
         if(!QDesktopServices::openUrl(url)){
             qDebug() << "打开失败";
         }

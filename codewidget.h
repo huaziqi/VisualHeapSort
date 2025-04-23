@@ -1,7 +1,7 @@
 #ifndef CODEWIDGET_H
 #define CODEWIDGET_H
 
-#include <QWidget>
+#include "common.h"
 
 class CodeWIdget : public QWidget
 {
@@ -9,7 +9,14 @@ class CodeWIdget : public QWidget
 public:
     explicit CodeWIdget(QWidget *parent = nullptr);
 
+private:
+    QVBoxLayout *codesLayout;
+    QVector<QLabel*> codeLabels;
+    QStringList codesContent;
 signals:
+
+public slots:
+    void acceptId(int codesId);
 };
 
 #endif // CODEWIDGET_H

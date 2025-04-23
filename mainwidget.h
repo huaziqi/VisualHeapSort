@@ -42,5 +42,8 @@ private:
 private slots:
     void generateData();
 
+signals:
+    void sendNums(const int &size, const QVector<int> &nums);
+
 };
 #endif // MAINWIDGET_H
