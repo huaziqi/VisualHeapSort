@@ -27,10 +27,18 @@ CodeWIdget::CodeWIdget(QWidget *parent)
     codesLayout = new QVBoxLayout();
     codesLayout->setSpacing(0);
     for(int i = 0; i < codesContent.length(); i ++){
-
         QLabel *tempLabel = new QLabel(codesContent[i], this);
         codeLabels.append(tempLabel);
         codesLayout->addWidget(codeLabels[i]);
     }
     this->setLayout(codesLayout);
+}
+
+void CodeWIdget::acceptId(int codesId)
+{
+    if(lastId != -1){
+        codeLabels[lastId]->setStyleSheet("background-color: black; color: white");
+    }
+    lastId = codesId;
+    codeLabels[codesId]->setStyleSheet("background-color: white; color: black");
 }

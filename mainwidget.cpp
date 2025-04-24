@@ -26,7 +26,8 @@ MainWidget::MainWidget(QWidget *parent)
     vScroll->setValue(2000);  // 垂直滚动到 y
     initCodeLayout();
     initController();
-
+    connect(stepByStepButton,  &QPushButton::clicked, heapSort, &HeapSort::stepedSort);
+    connect(heapSort, &HeapSort::codesId, codeWidget, &CodeWIdget::acceptId);
 }
 
 MainWidget::~MainWidget() {}
@@ -44,8 +45,7 @@ void MainWidget::initCodeLayout()
     codeLayout->addWidget(dataWidget);
 
     codeWidget = new CodeWIdget();
-    visualCode = new QVBoxLayout();
-    codeWidget->setLayout(visualCode);
+
     codeLayout->addWidget(codeWidget);
 
     codeLayout->setAlignment(Qt::AlignTop | Qt::AlignCenter);
@@ -64,6 +64,8 @@ void MainWidget::initCodeLayout()
 
     dataWidget->setMinimumWidth(100);
     dataWidget->setMaximumWidth(200);
+
+
 
 }
 
@@ -171,7 +173,6 @@ void MainWidget::generateData()
             qDebug() << "文件打开失败";
         }
     });
-
     connect(openFile, &QPushButton::clicked, this, [=]{
         QUrl url = QUrl::fromLocalFile("data.txt");
         if(!QDesktopServices::openUrl(url)){

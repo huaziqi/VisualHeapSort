@@ -13,6 +13,7 @@ private:
     QVBoxLayout *codesLayout;
     QVector<QLabel*> codeLabels;
     QStringList codesContent;
+    int lastId = -1;
 signals:
 
 public slots:

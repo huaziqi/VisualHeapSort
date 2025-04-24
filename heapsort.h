@@ -3,6 +3,24 @@
 
 #include "common.h"
 
+enum Step{
+    enterDown,
+    downJudge_1,
+    downSetV_1,
+    downJudge_2,
+    downSetV_2,
+    downJudge_3,
+    downSwap,
+    downDown,
+    loop_1,
+    loop_2,
+    loopDown_1,
+    loopSet,
+    loopSubSize,
+    loopDown_2,
+    enterHeap
+};
+
 class HeapSort : public QWidget
 {
     Q_OBJECT
@@ -10,13 +28,16 @@ public:
     explicit HeapSort(QWidget *parent = nullptr);
 
 private:
-    int vectorSize;
+    int vectorSize = 4, loopI, nowLoop;
+    int downU, downV;
     QVector<int> sortNums;
     void heapSortA();
     void down(int u, int v);
+    Step step = enterHeap;
 
 public slots:
     void acceptData(const int& size, const QVector<int>& nums);
+    void stepedSort();
 signals:
     void codesId(int codesId);
 
