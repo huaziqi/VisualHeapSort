@@ -7,7 +7,7 @@ MainWidget::MainWidget(QWidget *parent)
     heapSort = new HeapSort();
     mainLayout = new QVBoxLayout(this);
     animationLayout = new QHBoxLayout();
-    mainLayout->addLayout(animationLayout);
+    mainLayout->addLayout(animationLayout, 1);
     visualTreeArea = new QScrollArea();
     animationLayout->addWidget(visualTreeArea);
 
@@ -15,19 +15,17 @@ MainWidget::MainWidget(QWidget *parent)
     animationLayout->addLayout(codeLayout);
 
     visualTree = new VisualTree();
-    visualTree->resize(3000, 3000);
     visualTreeArea->setWidget(visualTree);
+    visualTree->resize(1000, 2000);
+    visualTreeArea->resize(1000, 1000);
 
-    QScrollBar *vScroll = visualTreeArea->verticalScrollBar();
-    QScrollBar *hScroll = visualTreeArea->horizontalScrollBar();
-
-    // 滚动到指定位置（x, y）
-    hScroll->setValue(2000);  // 水平滚动到 x
-    vScroll->setValue(2000);  // 垂直滚动到 y
     initCodeLayout();
     initController();
+    initTimer();
+
     connect(stepByStepButton,  &QPushButton::clicked, heapSort, &HeapSort::stepedSort);
     connect(heapSort, &HeapSort::codesId, codeWidget, &CodeWIdget::acceptId);
+
 }
 
 MainWidget::~MainWidget() {}
@@ -78,11 +76,21 @@ void MainWidget::initController()
     controllerWidget->setMinimumHeight(80);
     controllerLayout->setSpacing(10);
 
+    QVBoxLayout *sliderLayout = new QVBoxLayout();
+    timeSlider = new QSlider(Qt::Vertical);
+    timeSlider->setMaximumHeight(100);
+    QLabel* sliderLabel = new QLabel("动画速度");
+    sliderLayout->addWidget(timeSlider, 0, Qt::AlignHCenter);
+    sliderLayout->addWidget(sliderLabel, 0, Qt::AlignHCenter);
+
     generateDataButton = new QPushButton("生成数据");
-    startSortButton = new QPushButton("开始排序");
+    startSortButton = new QPushButton("自动播放");
     stopAnimeButton = new QPushButton("停止动画");
     stepByStepButton = new QPushButton("逐步执行");
     resetButton = new QPushButton("重置");
+
+    startSortButton->setDisabled(true);
+    stepByStepButton->setDisabled(true);
 
     QSize hugeButtonSize = QSize(100, 65), smallButtonSize = QSize(100, 30);
 
@@ -107,12 +115,35 @@ void MainWidget::initController()
     controllerLayout->addLayout(fButtonLayout);
     fButtonLayout->addWidget(stepByStepButton);
     fButtonLayout->addWidget(resetButton);
+    controllerLayout->addLayout(sliderLayout);
 
     connect(generateDataButton, &QPushButton::clicked, this, &MainWidget::generateData);
 }
 
-int MainWidget::generateRandom()
+void MainWidget::initTimer()
 {
+    timer = new QTimer();
+    timer->setInterval(500);
+    timer->stop();
+    timeSlider->setRange(0, 100);
+    timeSlider->setValue(50);
+    timeSlider->setSingleStep(1);
+    connect(timeSlider, &QSlider::valueChanged, this, [=]{
+        timer->setInterval(1000 *  (1.0 * timeSlider->value() / 100) + 100);
+    });
+    connect(startSortButton, &QPushButton::clicked, this, [=]{
+        timer->start();
+    });
+    connect(stepByStepButton, &QPushButton::clicked, this, [=]{
+        timer->stop();
+    });
+    connect(stopAnimeButton, &QPushButton::clicked, this, [=]{
+        timer->stop();
+    });
+    connect(timer, &QTimer::timeout, heapSort, &HeapSort::stepedSort);
+}
+
+int MainWidget::generateRandom(){
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(1, 100000);
@@ -121,7 +152,7 @@ int MainWidget::generateRandom()
 
 void MainWidget::generateData()
 {
-    QDialog* generateDataWindow = new QDialog();
+    QDialog* generateDataWindow = new QDialog(this);
     generateDataWindow->setFixedSize(300, 100);
     generateDataWindow->setModal(true);
     generateDataWindow->show();
@@ -136,7 +167,8 @@ void MainWidget::generateData()
     QPushButton *confirmBtn = new QPushButton("确认");
     QLabel* finishLabel = new QLabel();
     QPushButton *openFile = new QPushButton("查看数据");
-    openFile->setDisabled(true);
+    if(!dataProvided)
+        openFile->setDisabled(true);
     finishLabel->setAlignment(Qt::AlignCenter);
 
     inputLayout->addWidget(inputInfo);
@@ -147,9 +179,7 @@ void MainWidget::generateData()
     mainLayout->addLayout(inputLayout);
     mainLayout->addWidget(finishLabel);
     mainLayout->addWidget(openFile);
-
     mainLayout->setAlignment(Qt::AlignTop);
-
     connect(this, &MainWidget::sendNums, heapSort, &HeapSort::acceptData);
 
     connect(confirmBtn, &QPushButton::clicked, this, [=]{
@@ -167,6 +197,8 @@ void MainWidget::generateData()
             finishLabel->setText("数据生成完成");
             dataProvided = true;
             openFile->setDisabled(false);
+            startSortButton->setDisabled(false);
+            stepByStepButton->setDisabled(false);
             file.close();
         }
         else{

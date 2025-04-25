@@ -34,12 +34,14 @@ private:
     void heapSortA();
     void down(int u, int v);
     Step step = enterHeap;
+    int currentPoint;
 
 public slots:
     void acceptData(const int& size, const QVector<int>& nums);
     void stepedSort();
 signals:
     void codesId(int codesId);
+    void paintInfo(int currentPoint);
 
 signals:
 };

@@ -16,7 +16,7 @@
 
 #include <QPushButton>
 #include <QLineEdit>
-
+#include <QSlider>
 
 #include <QResizeEvent>
 #include <QSize>
@@ -25,6 +25,7 @@
 
 #include <QPainter>
 #include <QScrollBar>
+#include <QTimer>
 
 #include <random>
 #include <QDesktopServices>

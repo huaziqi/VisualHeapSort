@@ -26,6 +26,8 @@ private:
     QPushButton *startSortButton, *stepByStepButton, *stopAnimeButton, *resetButton;
     QPushButton *generateDataButton;
 
+    QTimer* timer;
+    QSlider *timeSlider;
 
     bool dataProvided = false;
 public:
@@ -33,15 +35,14 @@ public:
     ~MainWidget();
 protected:
     virtual void resizeEvent(QResizeEvent *event) override;
-
 private:
     void initCodeLayout();
     void initController();
+    void initTimer();
     int generateRandom();
 
 private slots:
     void generateData();
-
 signals:
     void sendNums(const int &size, const QVector<int> &nums);
 
