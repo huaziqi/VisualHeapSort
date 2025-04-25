@@ -18,7 +18,8 @@ enum Step{
     loopSet,
     loopSubSize,
     loopDown_2,
-    enterHeap
+    enterHeap,
+    over
 };
 
 class HeapSort : public QWidget
@@ -35,14 +36,14 @@ private:
     void down(int u, int v);
     Step step = enterHeap;
     int currentPoint;
-
+    QFile* file;
+    QTextStream out;
 public slots:
     void acceptData(const int& size, const QVector<int>& nums);
     void stepedSort();
 signals:
     void codesId(int codesId);
-    void paintInfo(int currentPoint, QVector<int> nums, int size);
-
+    void paintInfo(int currentPoint, QVector<int> nums, int size, bool contrast, bool swap, bool tow, QString info);
 signals:
 };
 

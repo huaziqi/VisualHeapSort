@@ -12,6 +12,7 @@ private:
     QVector<int> nums;
     QVector<QColor> colorList;
     QRect textRect;
+    QString someInfo;
     int size, currentPoint = 1;
     int radius, scale;
     bool gotInfo = false;
@@ -23,7 +24,7 @@ private:
 protected:
     void paintEvent(QPaintEvent *event);
 public slots:
-    void getInfo(int currentPoint, QVector<int> nums, int size);
+    void getInfo(int currentPoint, QVector<int> nums, int size, bool contrast, bool swap, bool tow, QString info);
 
 signals:
 };

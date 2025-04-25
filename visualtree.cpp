@@ -27,21 +27,25 @@ void VisualTree::paintText(QPoint point, int current, QPainter& painter)
 
 void VisualTree::paintEvent(QPaintEvent *event)
 {
+
     if(!gotInfo)
         return;
-    if(size == 0){
-        return;
-    }
+
     widgetWidth = this->width();
     radius = widgetWidth / scale * 40;
     double sqrt2 = sqrt(2) / 2;
     int lineLength = 70;
     int stdLine = widgetWidth / scale * lineLength * sqrt2;
-
     QPainter painter(this);
     QFont font;
     font.setPointSize(widgetWidth / scale * 20);
     painter.setFont(font);
+    painter.drawText(50, 50, someInfo);
+
+    if(size == 0){
+        return;
+    }
+
 
     QPen pen;
     pen.setWidth(3);
@@ -95,11 +99,12 @@ void VisualTree::paintEvent(QPaintEvent *event)
     }
 }
 
-void VisualTree::getInfo(int currentPoint, QVector<int> nums, int size)
+void VisualTree::getInfo(int currentPoint, QVector<int> nums, int size, bool contrast, bool swap, bool tow, QString info)
 {
     gotInfo = true;
     this->currentPoint = currentPoint;
     this->nums = nums;
     this->size = size;
+    someInfo = info;
     this->update();
 }

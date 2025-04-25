@@ -18,7 +18,7 @@ CodeWIdget::CodeWIdget(QWidget *parent)
                  << "    for(int i = vectorSize / 2; i >= 1; i --){"
                  << "        down(i, i);"
                  << "    }"
-                 << "    for(int i = 1; i <= vectorSize; i ++){"
+                 << "    for(int i = 1; i <= n; i ++){"
                  << "        sortNums[1] = sortNums[vectorSize];"
                  << "        vectorSize --;"
                  << "        down(1, 1);"

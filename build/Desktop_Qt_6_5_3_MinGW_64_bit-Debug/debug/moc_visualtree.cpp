@@ -46,11 +46,15 @@ static constexpr auto qt_meta_stringdata_CLASSVisualTreeENDCLASS = QtMocHelpers:
     "currentPoint",
     "QList<int>",
     "nums",
-    "size"
+    "size",
+    "contrast",
+    "swap",
+    "tow",
+    "info"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSVisualTreeENDCLASS_t {
-    uint offsetsAndSizes[14];
+    uint offsetsAndSizes[22];
     char stringdata0[11];
     char stringdata1[8];
     char stringdata2[1];
@@ -58,6 +62,10 @@ struct qt_meta_stringdata_CLASSVisualTreeENDCLASS_t {
     char stringdata4[11];
     char stringdata5[5];
     char stringdata6[5];
+    char stringdata7[9];
+    char stringdata8[5];
+    char stringdata9[4];
+    char stringdata10[5];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSVisualTreeENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -69,7 +77,11 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSVisualTreeENDCLASS_t qt_meta_st
         QT_MOC_LITERAL(20, 12),  // "currentPoint"
         QT_MOC_LITERAL(33, 10),  // "QList<int>"
         QT_MOC_LITERAL(44, 4),  // "nums"
-        QT_MOC_LITERAL(49, 4)   // "size"
+        QT_MOC_LITERAL(49, 4),  // "size"
+        QT_MOC_LITERAL(54, 8),  // "contrast"
+        QT_MOC_LITERAL(63, 4),  // "swap"
+        QT_MOC_LITERAL(68, 3),  // "tow"
+        QT_MOC_LITERAL(72, 4)   // "info"
     },
     "VisualTree",
     "getInfo",
@@ -77,7 +89,11 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSVisualTreeENDCLASS_t qt_meta_st
     "currentPoint",
     "QList<int>",
     "nums",
-    "size"
+    "size",
+    "contrast",
+    "swap",
+    "tow",
+    "info"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -97,10 +113,10 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSVisualTreeENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    3,   20,    2, 0x0a,    1 /* Public */,
+       1,    7,   20,    2, 0x0a,    1 /* Public */,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::Int, 0x80000000 | 4, QMetaType::Int,    3,    5,    6,
+    QMetaType::Void, QMetaType::Int, 0x80000000 | 4, QMetaType::Int, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::QString,    3,    5,    6,    7,    8,    9,   10,
 
        0        // eod
 };
@@ -118,7 +134,11 @@ Q_CONSTINIT const QMetaObject VisualTree::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
         QtPrivate::TypeAndForceComplete<QVector<int>, std::false_type>,
-        QtPrivate::TypeAndForceComplete<int, std::false_type>
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<bool, std::false_type>,
+        QtPrivate::TypeAndForceComplete<bool, std::false_type>,
+        QtPrivate::TypeAndForceComplete<bool, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>
     >,
     nullptr
 } };
@@ -129,7 +149,7 @@ void VisualTree::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<VisualTree *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->getInfo((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QList<int>>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
+        case 0: _t->getInfo((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QList<int>>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[6])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[7]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

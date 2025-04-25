@@ -7,6 +7,8 @@ HeapSort::HeapSort(QWidget *parent)
 void HeapSort::acceptData(const int &size, const QVector<int> &nums){
     this->vectorSize = size;
     this->sortNums = nums;
+    file = new QFile("ans.txt");
+    out.setDevice(file);
 }
 
 
@@ -32,21 +34,24 @@ void HeapSort::acceptData(const int &size, const QVector<int> &nums){
 //     << "}";
 void HeapSort::stepedSort()
 {
+    bool swap = false, contrast = false, tow = false;
+    QString info = "";
     switch(step){
     case enterHeap:
         emit codesId(10);
         currentPoint = 1;
         step = loop_1;
+        info = "开始建堆";
         nowLoop = 0;
         loopI = vectorSize / 2 + 1;
         break;
     case loop_1:
         emit codesId(11);
-        currentPoint = loopI;
         loopI -= 1;
         if(loopI == 0){
+            info = "开始弹出堆顶";
             step = loop_2;
-            loopI = 0;
+            file->open(QIODevice::WriteOnly);
             nowLoop = 1;
             break;
         }
@@ -56,39 +61,53 @@ void HeapSort::stepedSort()
         emit codesId(12);
         currentPoint = loopI;
         downU = downV = loopI;
+        info = "转到节点：" + QString::number(downU);
         step = enterDown;
         break;
     case loop_2:
         emit codesId(14);
-        loopI ++;
-        if(loopI >= vectorSize + 1){
+        currentPoint = 1;
+        if(vectorSize == 0){
+            step = over;
+            info = "结束排序，打开文件";
+            file->close();
+            QUrl url = QUrl::fromLocalFile("ans.txt");
+            if(!QDesktopServices::openUrl(url)){
+                qDebug() << "打开失败";
+            }
             break;
         }
         step = loopSet;
         break;
     case loopSet:
         emit codesId(15);
+        info = "输出堆顶到文件";
+        out << sortNums[1] << " ";
         sortNums[1] = sortNums[vectorSize];
         step = loopSubSize;
         break;
     case loopSubSize:
         emit codesId(16);
+        info = "减小堆的大小";
         vectorSize --;
         step = loopDown_2;
         break;
     case loopDown_2:
         emit codesId(17);
+        info = "转到堆顶节点， 开始下沉";
         currentPoint = 1;
         downU = downV = 1;
         step = enterDown;
         break;
     case enterDown:
         emit codesId(0);
+        info = "转到节点：" + QString::number(downU);
         currentPoint = downU;
         step = downJudge_1;
         break;
     case downJudge_1:
         emit codesId(1);
+        info = "判断 (2 *" + QString::number(downU) + ")节点是否小于" + QString::number(downV) + "节点";
         if(2 * downU <= vectorSize && sortNums[2 * downU] < sortNums[downV]){
             step = downSetV_1;
             break;
@@ -99,11 +118,13 @@ void HeapSort::stepedSort()
         }
     case downSetV_1:
         emit codesId(2);
+        info = "确实小于，存储 2 * downU ";
         downV = 2 * downU;
         step = downJudge_2;
         break;
     case downJudge_2:
         emit codesId(3);
+        info = "判断 (2 *" + QString::number(downU) + " + 1 )节点是否小于" + QString::number(downV) + "节点";
         if(2 * downU + 1 <= vectorSize && sortNums[2 * downU + 1] < sortNums[downV]){
             step = downSetV_2;
             break;
@@ -114,11 +135,13 @@ void HeapSort::stepedSort()
         }
     case downSetV_2:
         emit codesId(4);
+        info = "确实小于，存储 2 * downU + 1 ";
         downV = 2 * downU + 1;
         step = downJudge_3;
         break;
     case downJudge_3:
         emit codesId(5);
+        info = "判断" + QString::number(downU) + "节点和" + QString::number(downV) + "节点是否相等";
         if(downU != downV){
             step = downSwap;
             break;
@@ -130,18 +153,19 @@ void HeapSort::stepedSort()
         }
     case downSwap:
         emit codesId(6);
+        info = "交换" + QString::number(downU) + "和" + QString::number(downV) + "点";
         std::swap(sortNums[downU], sortNums[downV]);
         step = downDown;
         break;
     case downDown:
         emit codesId(7);
+        info = "转到节点：" + QString::number(downV);
         currentPoint = downV;
         downU = downV;
         step = enterDown;
         break;
     }
-
-    emit paintInfo(currentPoint, sortNums, vectorSize);
+    emit paintInfo(currentPoint, sortNums, vectorSize, contrast, swap, tow, info);
 }
 
 

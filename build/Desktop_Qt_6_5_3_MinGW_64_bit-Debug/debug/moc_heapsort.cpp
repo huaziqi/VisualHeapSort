@@ -48,12 +48,16 @@ static constexpr auto qt_meta_stringdata_CLASSHeapSortENDCLASS = QtMocHelpers::s
     "QList<int>",
     "nums",
     "size",
+    "contrast",
+    "swap",
+    "tow",
+    "info",
     "acceptData",
     "stepedSort"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSHeapSortENDCLASS_t {
-    uint offsetsAndSizes[20];
+    uint offsetsAndSizes[28];
     char stringdata0[9];
     char stringdata1[8];
     char stringdata2[1];
@@ -62,8 +66,12 @@ struct qt_meta_stringdata_CLASSHeapSortENDCLASS_t {
     char stringdata5[11];
     char stringdata6[5];
     char stringdata7[5];
-    char stringdata8[11];
-    char stringdata9[11];
+    char stringdata8[9];
+    char stringdata9[5];
+    char stringdata10[4];
+    char stringdata11[5];
+    char stringdata12[11];
+    char stringdata13[11];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSHeapSortENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -77,8 +85,12 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSHeapSortENDCLASS_t qt_meta_stri
         QT_MOC_LITERAL(41, 10),  // "QList<int>"
         QT_MOC_LITERAL(52, 4),  // "nums"
         QT_MOC_LITERAL(57, 4),  // "size"
-        QT_MOC_LITERAL(62, 10),  // "acceptData"
-        QT_MOC_LITERAL(73, 10)   // "stepedSort"
+        QT_MOC_LITERAL(62, 8),  // "contrast"
+        QT_MOC_LITERAL(71, 4),  // "swap"
+        QT_MOC_LITERAL(76, 3),  // "tow"
+        QT_MOC_LITERAL(80, 4),  // "info"
+        QT_MOC_LITERAL(85, 10),  // "acceptData"
+        QT_MOC_LITERAL(96, 10)   // "stepedSort"
     },
     "HeapSort",
     "codesId",
@@ -88,6 +100,10 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSHeapSortENDCLASS_t qt_meta_stri
     "QList<int>",
     "nums",
     "size",
+    "contrast",
+    "swap",
+    "tow",
+    "info",
     "acceptData",
     "stepedSort"
 };
@@ -110,15 +126,15 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSHeapSortENDCLASS[] = {
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
        1,    1,   38,    2, 0x06,    1 /* Public */,
-       3,    3,   41,    2, 0x06,    3 /* Public */,
+       3,    7,   41,    2, 0x06,    3 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       8,    2,   48,    2, 0x0a,    7 /* Public */,
-       9,    0,   53,    2, 0x0a,   10 /* Public */,
+      12,    2,   56,    2, 0x0a,   11 /* Public */,
+      13,    0,   61,    2, 0x0a,   14 /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    1,
-    QMetaType::Void, QMetaType::Int, 0x80000000 | 5, QMetaType::Int,    4,    6,    7,
+    QMetaType::Void, QMetaType::Int, 0x80000000 | 5, QMetaType::Int, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::QString,    4,    6,    7,    8,    9,   10,   11,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int, 0x80000000 | 5,    7,    6,
@@ -144,6 +160,10 @@ Q_CONSTINIT const QMetaObject HeapSort::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
         QtPrivate::TypeAndForceComplete<QVector<int>, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<bool, std::false_type>,
+        QtPrivate::TypeAndForceComplete<bool, std::false_type>,
+        QtPrivate::TypeAndForceComplete<bool, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         // method 'acceptData'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<const int &, std::false_type>,
@@ -161,7 +181,7 @@ void HeapSort::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         (void)_t;
         switch (_id) {
         case 0: _t->codesId((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 1: _t->paintInfo((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QList<int>>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
+        case 1: _t->paintInfo((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QList<int>>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[6])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[7]))); break;
         case 2: _t->acceptData((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QList<int>>>(_a[2]))); break;
         case 3: _t->stepedSort(); break;
         default: ;
@@ -194,7 +214,7 @@ void HeapSort::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
             }
         }
         {
-            using _t = void (HeapSort::*)(int , QVector<int> , int );
+            using _t = void (HeapSort::*)(int , QVector<int> , int , bool , bool , bool , QString );
             if (_t _q_method = &HeapSort::paintInfo; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 1;
                 return;
@@ -241,9 +261,9 @@ void HeapSort::codesId(int _t1)
 }
 
 // SIGNAL 1
-void HeapSort::paintInfo(int _t1, QVector<int> _t2, int _t3)
+void HeapSort::paintInfo(int _t1, QVector<int> _t2, int _t3, bool _t4, bool _t5, bool _t6, QString _t7)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t4))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t5))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t6))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t7))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 QT_WARNING_POP
