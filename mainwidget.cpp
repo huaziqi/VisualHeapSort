@@ -22,6 +22,7 @@ MainWidget::MainWidget(QWidget *parent)
     initController();
     initTimer();
 
+    connect(heapSort, &HeapSort::paintInfo, visualTree, &VisualTree::getInfo);
     connect(stepByStepButton,  &QPushButton::clicked, heapSort, &HeapSort::stepedSort);
     connect(heapSort, &HeapSort::codesId, codeWidget, &CodeWIdget::acceptId);
 
@@ -92,7 +93,7 @@ void MainWidget::initController()
     startSortButton->setDisabled(true);
     stepByStepButton->setDisabled(true);
 
-    QSize hugeButtonSize = QSize(100, 65), smallButtonSize = QSize(100, 30);
+    QSize hugeButtonSize = QSize(100, 95), smallButtonSize = QSize(100, 45);
 
     generateDataButton->resize(hugeButtonSize);
     startSortButton->resize(hugeButtonSize);

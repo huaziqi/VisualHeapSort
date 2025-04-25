@@ -42,7 +42,7 @@ void HeapSort::stepedSort()
         break;
     case loop_1:
         emit codesId(11);
-        currentPoint = 1;
+        currentPoint = loopI;
         loopI -= 1;
         if(loopI == 0){
             step = loop_2;
@@ -78,11 +78,13 @@ void HeapSort::stepedSort()
         break;
     case loopDown_2:
         emit codesId(17);
+        currentPoint = 1;
         downU = downV = 1;
         step = enterDown;
         break;
     case enterDown:
         emit codesId(0);
+        currentPoint = downU;
         step = downJudge_1;
         break;
     case downJudge_1:
@@ -133,12 +135,13 @@ void HeapSort::stepedSort()
         break;
     case downDown:
         emit codesId(7);
+        currentPoint = downV;
         downU = downV;
         step = enterDown;
         break;
     }
 
-
+    emit paintInfo(currentPoint, sortNums, vectorSize);
 }
 
 

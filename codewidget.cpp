@@ -30,7 +30,9 @@ CodeWIdget::CodeWIdget(QWidget *parent)
         QLabel *tempLabel = new QLabel(codesContent[i], this);
         codeLabels.append(tempLabel);
         codesLayout->addWidget(codeLabels[i]);
+        tempLabel->setStyleSheet("font-size: 18px;");
     }
+
     this->setLayout(codesLayout);
 }
 
