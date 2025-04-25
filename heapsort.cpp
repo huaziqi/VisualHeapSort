@@ -58,7 +58,6 @@ void HeapSort::stepedSort()
         downU = downV = loopI;
         step = enterDown;
         break;
-
     case loop_2:
         emit codesId(14);
         loopI ++;

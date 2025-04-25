@@ -41,7 +41,7 @@ public slots:
     void stepedSort();
 signals:
     void codesId(int codesId);
-    void paintInfo(int currentPoint);
+    void paintInfo(int currentPoint, QVector<int> nums);
 
 signals:
 };

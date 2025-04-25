@@ -16,8 +16,7 @@ MainWidget::MainWidget(QWidget *parent)
 
     visualTree = new VisualTree();
     visualTreeArea->setWidget(visualTree);
-    visualTree->resize(1000, 2000);
-    visualTreeArea->resize(1000, 1000);
+    visualTree->resize(visualTreeArea->size());
 
     initCodeLayout();
     initController();
@@ -32,6 +31,7 @@ MainWidget::~MainWidget() {}
 
 void MainWidget::resizeEvent(QResizeEvent *event)
 {
+    visualTree->resize(visualTreeArea->size());
     QWidget::resizeEvent(event);
 }
 
@@ -146,7 +146,7 @@ void MainWidget::initTimer()
 int MainWidget::generateRandom(){
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(1, 100000);
+    std::uniform_int_distribution<> dis(1, 1000);
     return dis(gen);
 }
 
