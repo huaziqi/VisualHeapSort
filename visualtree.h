@@ -22,6 +22,7 @@ private:
     void drawNum();
     int getLayer(int point);
     void paintText(QPoint point, int current, QPainter& painter);
+    void paintCircle(QPoint point, QPainter& painter, QPen& pen, bool t);
 protected:
     void paintEvent(QPaintEvent *event);
 public slots:

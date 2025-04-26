@@ -145,7 +145,7 @@ void HeapSort::stepedSort()
         break;
     case downJudge_3:
         emit codesId(5);
-        info = "判断" + QString::number(downU) + "节点和" + QString::number(downV) + "节点是否相等";
+        info = "判断(" + QString::number(downU) + ")和(" + QString::number(downV) + ")是否相等";
         if(downU != downV){
             step = downSwap;
             break;
@@ -165,7 +165,7 @@ void HeapSort::stepedSort()
         break;
     case downDown:
         emit codesId(7);
-        info = "转到节点：" + QString::number(downV);
+        info = "转到(" + QString::number(downV) + ")";
         currentPoint = downV;
         downU = downV;
         step = enterDown;

@@ -63,9 +63,6 @@ void MainWidget::initCodeLayout()
 
     dataWidget->setMinimumWidth(100);
     dataWidget->setMaximumWidth(200);
-
-
-
 }
 
 void MainWidget::initController()
