@@ -32,15 +32,14 @@ CodeWIdget::CodeWIdget(QWidget *parent)
         codesLayout->addWidget(codeLabels[i]);
         tempLabel->setStyleSheet("font-size: 18px;");
     }
-
     this->setLayout(codesLayout);
 }
 
 void CodeWIdget::acceptId(int codesId)
 {
     if(lastId != -1){
-        codeLabels[lastId]->setStyleSheet("background-color: black; color: white");
+        codeLabels[lastId]->setStyleSheet("background-color: black; color: white; font-size: 18px;");
     }
     lastId = codesId;
-    codeLabels[codesId]->setStyleSheet("background-color: white; color: black");
+    codeLabels[codesId]->setStyleSheet("background-color: white; color: blue; font-size: 22px;");
 }

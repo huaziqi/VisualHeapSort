@@ -16,6 +16,7 @@ private:
     int size, currentPoint = 1;
     int radius, scale;
     bool gotInfo = false;
+    bool swap, contrast, tow;
     double widgetWidth;
 
     void drawNum();
