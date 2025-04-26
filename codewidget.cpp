@@ -41,5 +41,5 @@ void CodeWIdget::acceptId(int codesId)
         codeLabels[lastId]->setStyleSheet("background-color: black; color: white; font-size: 18px;");
     }
     lastId = codesId;
-    codeLabels[codesId]->setStyleSheet("background-color: white; color: blue; font-size: 22px;");
+    codeLabels[codesId]->setStyleSheet("background-color: white; color: blue; font-size: 18px;");
 }

@@ -5,11 +5,10 @@ VisualTree::VisualTree(QWidget *parent)
     : QWidget{parent}
 {
     this->setStyleSheet("background-color: black;");
-    colorList.append(QColor(255, 0, 0, 127));
-    colorList.append(QColor(0, 255, 0, 127));
-    colorList.append(QColor(0, 0, 255, 127));
+    colorList.append(QColor(255, 0, 0, 80));
+    colorList.append(QColor(0, 255, 0, 80));
+    colorList.append(QColor(0, 0, 255, 80));
     scale = 1000;
-
 }
 
 int VisualTree::getLayer(int point)
@@ -28,10 +27,47 @@ void VisualTree::paintText(QPoint point, int current, QPainter& painter)
 
 void VisualTree::paintCircle(QPoint point, QPainter &painter, QPen &pen, bool t)
 {
-    if((contrast || swap) && t)
+    if((contrast || swap || judge) && t)
         pen.setColor(QColor(222, 222, 222));
     painter.setPen(pen);
     painter.drawEllipse(point, radius, radius);
+    if((contrast || swap || judge) && t)
+        painter.drawEllipse(point, radius + 5, radius + 5);
+    pen.setColor(QColor(0, 0, 0));
+    painter.setPen(pen);
+}
+
+void VisualTree::paintArrow(QPoint point, QPainter &painter, QPen &pen, bool t, bool p)
+{
+    double sqrt2 = sqrt(2) / 2;
+    QPoint nxtPnt;
+
+    if(judge){
+        if(p)
+            pen.setColor(QColor(190, 190, 190));
+        else
+            pen.setColor(QColor(0, 0, 0));
+        painter.setPen(pen);
+    }
+    if(swap and gotV){
+        if(p)
+            pen.setColor(QColor(0, 0, 0));
+        else
+            pen.setColor(QColor(190, 190, 190));
+        painter.setPen(pen);
+    }
+
+    if(t){
+        point.setY(point.y() + radius);
+        nxtPnt.setX(point.x());
+        nxtPnt.setY(point.y() + widgetWidth / 1000 * 50);
+        painter.drawLine(point, nxtPnt);
+        nxtPnt.setX(point.x() - widgetWidth / 1000 * 30 * sqrt2);
+        nxtPnt.setY(point.y() + widgetWidth / 1000 * 30 * sqrt2);
+        painter.drawLine(point, nxtPnt);
+        nxtPnt.setX(nxtPnt.x() + widgetWidth / 1000 * 60 * sqrt2);
+        painter.drawLine(point, nxtPnt);
+    }
     pen.setColor(QColor(0, 0, 0));
     painter.setPen(pen);
 }
@@ -41,7 +77,6 @@ void VisualTree::paintEvent(QPaintEvent *event)
 
     if(!gotInfo)
         return;
-
     widgetWidth = this->width();
     radius = widgetWidth / scale * 60;
     double sqrt2 = sqrt(2) / 2;
@@ -93,10 +128,11 @@ void VisualTree::paintEvent(QPaintEvent *event)
             nowPainterPos.setX(nowPainterPos.x() + sqrt2 * radius);
     }
     fillWidth = widgetWidth;
-    if(contrast || swap)
-            fillWidth = 1.0 * nums[currentPoint] / 1000 * widgetWidth;
+    if(contrast || swap || judge)
+        fillWidth = 1.0 * nums[currentPoint] / 1000 * widgetWidth;
     painter.fillRect(0, nowPainterPos.y() - (radius + stdLine / 2) * sqrt2, fillWidth, (2 * radius + stdLine) * sqrt2, colorList[getLayer(currentPoint) % 3]);
     paintCircle(nowPainterPos, painter, pen, true);
+    paintArrow(nowPainterPos, painter, pen, (judge || swap), true);
     paintText(nowPainterPos, currentPoint, painter);
 
     if(currentPoint * 2 <= size){
@@ -108,7 +144,7 @@ void VisualTree::paintEvent(QPaintEvent *event)
         nowPainterPos.setX(nowPainterPos.x() - sqrt2 * radius);
         nowPainterPos.setY(nowPainterPos.y() + sqrt2 * radius);
         fillWidth = widgetWidth;
-        if((contrast || swap)){
+        if((contrast || swap || judge)){
             fillWidth = 1.0 * nums[currentPoint * 2] / 1000 * widgetWidth;
             if (!tow)
                 painter.fillRect(0, nowPainterPos.y() - (radius + stdLine / 2) * sqrt2, fillWidth, (2 * radius + stdLine) * sqrt2, colorList[getLayer(currentPoint * 2) % 3]);
@@ -116,6 +152,7 @@ void VisualTree::paintEvent(QPaintEvent *event)
         else
             painter.fillRect(0, nowPainterPos.y() - (radius + stdLine / 2) * sqrt2, fillWidth, (2 * radius + stdLine) * sqrt2, colorList[getLayer(currentPoint * 2) % 3]);
         paintCircle(nowPainterPos, painter, pen, !tow);
+        paintArrow(nowPainterPos, painter, pen, gotV && !vSide, false);
         paintText(nowPainterPos, currentPoint * 2, painter);
     }
     if(currentPoint * 2 + 1 <= size){
@@ -126,7 +163,7 @@ void VisualTree::paintEvent(QPaintEvent *event)
         nowPainterPos.setX(nowPainterPos.x() + sqrt2 * radius);
         nowPainterPos.setY(nowPainterPos.y() + sqrt2 * radius);
         fillWidth = widgetWidth;
-        if((contrast || swap)){
+        if((contrast || swap || judge)){
             fillWidth = 1.0 * nums[currentPoint * 2 + 1] / 1000 * widgetWidth;
             if (tow)
                 painter.fillRect(0, nowPainterPos.y() - (radius + stdLine / 2) * sqrt2, fillWidth, (2 * radius + stdLine) * sqrt2, colorList[getLayer(currentPoint * 2) % 3]);
@@ -134,20 +171,23 @@ void VisualTree::paintEvent(QPaintEvent *event)
         else
             painter.fillRect(0, nowPainterPos.y() - (radius + stdLine / 2) * sqrt2, fillWidth, (2 * radius + stdLine) * sqrt2, colorList[getLayer(currentPoint * 2) % 3]);
         paintCircle(nowPainterPos, painter, pen, tow);
+        paintArrow(nowPainterPos, painter, pen, gotV && vSide, false);
         textRect = {nowPainterPos.x() - radius, nowPainterPos.y() - radius, radius * 2, radius * 2};
         painter.drawText(textRect, Qt::AlignCenter,  "(" + QString::number(currentPoint * 2 + 1) + ") " + QString::number(nums[currentPoint * 2 + 1]) + "");
     }
 }
 
-void VisualTree::getInfo(int currentPoint, QVector<int> nums, int size, bool contrast, bool swap, bool tow, QString info)
-{
+void VisualTree::getInfo(int currentPoint, QVector<int> nums, int size, bool contrast, bool swap, bool tow, bool gotV, bool vSide, bool judge, QString info){
     gotInfo = true;
     this->currentPoint = currentPoint;
     this->nums = nums;
     this->size = size;
     this->swap = swap;
     this->tow = tow;
+    this->gotV = gotV;
+    this->vSide = vSide;
     this->contrast = contrast;
+    this->judge = judge;
     someInfo = info;
     this->update();
 }

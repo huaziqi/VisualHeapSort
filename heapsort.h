@@ -43,7 +43,7 @@ public slots:
     void stepedSort();
 signals:
     void codesId(int codesId);
-    void paintInfo(int currentPoint, QVector<int> nums, int size, bool contrast, bool swap, bool tow, QString info);
+    void paintInfo(int currentPoint, QVector<int> nums, int size, bool contrast, bool swap, bool tow, bool gotV, bool vSide, bool judge, QString info);
 signals:
 };
 
