@@ -36,6 +36,7 @@ void VisualTree::paintEvent(QPaintEvent *event)
     radius = widgetWidth / scale * 60;
     double sqrt2 = sqrt(2) / 2;
     int lineLength = 120;
+    int fillWidth;
     int stdLine = widgetWidth / scale * lineLength * sqrt2;
     QPainter painter(this);
     QFont font;
@@ -81,7 +82,10 @@ void VisualTree::paintEvent(QPaintEvent *event)
         else
             nowPainterPos.setX(nowPainterPos.x() + sqrt2 * radius);
     }
-    painter.fillRect(0, nowPainterPos.y() - (radius + stdLine / 2) * sqrt2, widgetWidth, (2 * radius + stdLine) * sqrt2, colorList[getLayer(currentPoint) % 3]);
+    fillWidth = widgetWidth;
+    if(contrast || swap)
+            fillWidth = 1.0 * nums[currentPoint] / 1000 * widgetWidth;
+    painter.fillRect(0, nowPainterPos.y() - (radius + stdLine / 2) * sqrt2, fillWidth, (2 * radius + stdLine) * sqrt2, colorList[getLayer(currentPoint) % 3]);
     painter.drawEllipse(nowPainterPos, radius, radius);
     paintText(nowPainterPos, currentPoint, painter);
 
@@ -93,7 +97,16 @@ void VisualTree::paintEvent(QPaintEvent *event)
         painter.drawLine(prePainterPos, nowPainterPos);
         nowPainterPos.setX(nowPainterPos.x() - sqrt2 * radius);
         nowPainterPos.setY(nowPainterPos.y() + sqrt2 * radius);
-        painter.fillRect(0, nowPainterPos.y() - (radius + stdLine / 2) * sqrt2, widgetWidth, (2 * radius + stdLine) * sqrt2, colorList[getLayer(currentPoint * 2) % 3]);
+        fillWidth = widgetWidth;
+        if((contrast || swap)){
+            fillWidth = 1.0 * nums[currentPoint * 2] / 1000 * widgetWidth;
+            if (!tow)
+                painter.fillRect(0, nowPainterPos.y() - (radius + stdLine / 2) * sqrt2, fillWidth, (2 * radius + stdLine) * sqrt2, colorList[getLayer(currentPoint * 2) % 3]);
+            if(tow && currentPoint * 2 + 1 > size)
+                painter.fillRect(0, nowPainterPos.y() - (radius + stdLine / 2) * sqrt2, widgetWidth, (2 * radius + stdLine) * sqrt2, colorList[getLayer(currentPoint * 2) % 3]);
+        }
+        else
+            painter.fillRect(0, nowPainterPos.y() - (radius + stdLine / 2) * sqrt2, fillWidth, (2 * radius + stdLine) * sqrt2, colorList[getLayer(currentPoint * 2) % 3]);
         painter.drawEllipse(nowPainterPos, radius, radius);
         paintText(nowPainterPos, currentPoint * 2, painter);
     }
@@ -104,9 +117,17 @@ void VisualTree::paintEvent(QPaintEvent *event)
         painter.drawLine(prePainterPos, nowPainterPos);
         nowPainterPos.setX(nowPainterPos.x() + sqrt2 * radius);
         nowPainterPos.setY(nowPainterPos.y() + sqrt2 * radius);
+        fillWidth = widgetWidth;
+        if((contrast || swap)){
+            fillWidth = 1.0 * nums[currentPoint * 2 + 1] / 1000 * widgetWidth;
+            if (tow)
+                painter.fillRect(0, nowPainterPos.y() - (radius + stdLine / 2) * sqrt2, fillWidth, (2 * radius + stdLine) * sqrt2, colorList[getLayer(currentPoint * 2) % 3]);
+        }
+        else
+            painter.fillRect(0, nowPainterPos.y() - (radius + stdLine / 2) * sqrt2, fillWidth, (2 * radius + stdLine) * sqrt2, colorList[getLayer(currentPoint * 2) % 3]);
         painter.drawEllipse(nowPainterPos, radius, radius);
         textRect = {nowPainterPos.x() - radius, nowPainterPos.y() - radius, radius * 2, radius * 2};
-        painter.drawText(textRect, Qt::AlignCenter,  QString::number(currentPoint * 2 + 1) + ": " + QString::number(nums[currentPoint * 2 + 1]) + "");
+        painter.drawText(textRect, Qt::AlignCenter,  "(" + QString::number(currentPoint * 2 + 1) + ") " + QString::number(nums[currentPoint * 2 + 1]) + "");
     }
 }
 
@@ -117,6 +138,7 @@ void VisualTree::getInfo(int currentPoint, QVector<int> nums, int size, bool con
     this->nums = nums;
     this->size = size;
     this->swap = swap;
+    this->tow = tow;
     this->contrast = contrast;
     someInfo = info;
     this->update();

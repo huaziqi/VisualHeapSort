@@ -61,7 +61,7 @@ void HeapSort::stepedSort()
         emit codesId(12);
         currentPoint = loopI;
         downU = downV = loopI;
-        info = "转到节点：" + QString::number(downU);
+        info = "转到(" + QString::number(downU) + ")";
         step = enterDown;
         break;
     case loop_2:
@@ -101,13 +101,15 @@ void HeapSort::stepedSort()
         break;
     case enterDown:
         emit codesId(0);
-        info = "转到节点：" + QString::number(downU);
+        info = "转到(" + QString::number(downU) + ")";
         currentPoint = downU;
         step = downJudge_1;
         break;
     case downJudge_1:
         emit codesId(1);
-        info = "判断 (2 *" + QString::number(downU) + ")节点是否小于" + QString::number(downV) + "节点";
+        info = "判断 (" + QString::number(2 * downU) + ") 是否小于(" + QString::number(downV) + ")";
+        contrast = true;
+        tow = false;
         if(2 * downU <= vectorSize && sortNums[2 * downU] < sortNums[downV]){
             step = downSetV_1;
             break;
@@ -124,7 +126,9 @@ void HeapSort::stepedSort()
         break;
     case downJudge_2:
         emit codesId(3);
-        info = "判断 (2 *" + QString::number(downU) + " + 1 )节点是否小于" + QString::number(downV) + "节点";
+        info = "判断 (" + QString::number(2 * downU + 1) + ") 是否小于 (" + QString::number(downV) + ") ";
+        contrast = true;
+        tow = true;
         if(2 * downU + 1 <= vectorSize && sortNums[2 * downU + 1] < sortNums[downV]){
             step = downSetV_2;
             break;
@@ -153,6 +157,8 @@ void HeapSort::stepedSort()
         }
     case downSwap:
         emit codesId(6);
+        swap = true;
+        tow = false ? (downV == 2 * downU) : true;
         info = "交换" + QString::number(downU) + "和" + QString::number(downV) + "点";
         std::swap(sortNums[downU], sortNums[downV]);
         step = downDown;
