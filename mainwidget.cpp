@@ -26,6 +26,9 @@ MainWidget::MainWidget(QWidget *parent)
     connect(stepByStepButton,  &QPushButton::clicked, heapSort, &HeapSort::stepedSort);
     connect(heapSort, &HeapSort::codesId, codeWidget, &CodeWIdget::acceptId);
 
+    QFont font("", 14);
+    this->setFont(font);
+
 }
 
 MainWidget::~MainWidget() {}
@@ -56,8 +59,7 @@ void MainWidget::initCodeLayout()
     swapTimes = new QLabel("交换次数: ");
 
     visualData->addWidget(dataNum);
-    visualData->addWidget(layersNum);
-    visualData->addWidget(timeConsumed);
+
     visualData->addWidget(compareTimes);
     visualData->addWidget(swapTimes);
 
@@ -81,6 +83,7 @@ void MainWidget::initController()
     sliderLayout->addWidget(timeSlider, 0, Qt::AlignHCenter);
     sliderLayout->addWidget(sliderLabel, 0, Qt::AlignHCenter);
 
+    inputDataButton = new QPushButton("导入数据");
     generateDataButton = new QPushButton("生成数据");
     startSortButton = new QPushButton("自动播放");
     stopAnimeButton = new QPushButton("停止动画");
@@ -92,6 +95,7 @@ void MainWidget::initController()
 
     QSize hugeButtonSize = QSize(100, 95), smallButtonSize = QSize(100, 45);
 
+    inputDataButton->resize(hugeButtonSize);
     generateDataButton->resize(hugeButtonSize);
     startSortButton->resize(hugeButtonSize);
     stopAnimeButton->resize(hugeButtonSize);
@@ -100,12 +104,14 @@ void MainWidget::initController()
 
     controllerLayout->setAlignment(Qt::AlignLeft);
 
+    inputDataButton->setMinimumSize(hugeButtonSize);
     generateDataButton->setMinimumSize(hugeButtonSize);
     startSortButton->setMinimumSize(hugeButtonSize);
     stopAnimeButton->setMinimumSize(hugeButtonSize);
     stepByStepButton->setMinimumSize(smallButtonSize);
     resetButton->setMinimumSize(smallButtonSize);
 
+    controllerLayout->addWidget(inputDataButton);
     controllerLayout->addWidget(generateDataButton);
     controllerLayout->addWidget(startSortButton);
     controllerLayout->addWidget(stopAnimeButton);
@@ -115,7 +121,12 @@ void MainWidget::initController()
     fButtonLayout->addWidget(resetButton);
     controllerLayout->addLayout(sliderLayout);
 
+    connect(resetButton, &QPushButton::clicked, this, [=]{
+        emit resetTree();
+    });
+    connect(this, &MainWidget::resetTree, heapSort, &HeapSort::reset);
     connect(generateDataButton, &QPushButton::clicked, this, &MainWidget::generateData);
+    connect(inputDataButton, &QPushButton::clicked, this, &MainWidget::inputData);
 }
 
 void MainWidget::initTimer()
@@ -209,6 +220,11 @@ void MainWidget::generateData()
             qDebug() << "打开失败";
         }
     });
+}
+
+void MainWidget::inputData()
+{
+
 }
 
 

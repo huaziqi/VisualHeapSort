@@ -53,11 +53,12 @@ static constexpr auto qt_meta_stringdata_CLASSVisualTreeENDCLASS = QtMocHelpers:
     "gotV",
     "vSide",
     "judge",
+    "inDown",
     "info"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSVisualTreeENDCLASS_t {
-    uint offsetsAndSizes[28];
+    uint offsetsAndSizes[30];
     char stringdata0[11];
     char stringdata1[8];
     char stringdata2[1];
@@ -71,7 +72,8 @@ struct qt_meta_stringdata_CLASSVisualTreeENDCLASS_t {
     char stringdata10[5];
     char stringdata11[6];
     char stringdata12[6];
-    char stringdata13[5];
+    char stringdata13[7];
+    char stringdata14[5];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSVisualTreeENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -90,7 +92,8 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSVisualTreeENDCLASS_t qt_meta_st
         QT_MOC_LITERAL(72, 4),  // "gotV"
         QT_MOC_LITERAL(77, 5),  // "vSide"
         QT_MOC_LITERAL(83, 5),  // "judge"
-        QT_MOC_LITERAL(89, 4)   // "info"
+        QT_MOC_LITERAL(89, 6),  // "inDown"
+        QT_MOC_LITERAL(96, 4)   // "info"
     },
     "VisualTree",
     "getInfo",
@@ -105,6 +108,7 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSVisualTreeENDCLASS_t qt_meta_st
     "gotV",
     "vSide",
     "judge",
+    "inDown",
     "info"
 };
 #undef QT_MOC_LITERAL
@@ -125,10 +129,10 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSVisualTreeENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,   10,   20,    2, 0x0a,    1 /* Public */,
+       1,   11,   20,    2, 0x0a,    1 /* Public */,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::Int, 0x80000000 | 4, QMetaType::Int, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::QString,    3,    5,    6,    7,    8,    9,   10,   11,   12,   13,
+    QMetaType::Void, QMetaType::Int, 0x80000000 | 4, QMetaType::Int, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::QString,    3,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,
 
        0        // eod
 };
@@ -153,6 +157,7 @@ Q_CONSTINIT const QMetaObject VisualTree::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<bool, std::false_type>,
         QtPrivate::TypeAndForceComplete<bool, std::false_type>,
         QtPrivate::TypeAndForceComplete<bool, std::false_type>,
+        QtPrivate::TypeAndForceComplete<bool, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>
     >,
     nullptr
@@ -164,7 +169,7 @@ void VisualTree::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<VisualTree *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->getInfo((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QList<int>>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[6])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[7])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[8])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[9])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[10]))); break;
+        case 0: _t->getInfo((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QList<int>>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[6])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[7])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[8])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[9])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[10])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[11]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

@@ -14,11 +14,11 @@ enum Step{
     downDown,
     loop_1,
     loop_2,
-    loopDown_1,
+    loopDown_1, //10
     loopSet,
     loopSubSize,
     loopDown_2,
-    enterHeap,
+    enterHeap, //14
     over
 };
 
@@ -41,9 +41,10 @@ private:
 public slots:
     void acceptData(const int& size, const QVector<int>& nums);
     void stepedSort();
+    void reset();
 signals:
     void codesId(int codesId);
-    void paintInfo(int currentPoint, QVector<int> nums, int size, bool contrast, bool swap, bool tow, bool gotV, bool vSide, bool judge, QString info);
+    void paintInfo(int currentPoint, QVector<int> nums, int size, bool contrast, bool swap, bool tow, bool gotV, bool vSide, bool judge, bool inDown, QString info);
 signals:
 };
 

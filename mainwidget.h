@@ -23,7 +23,7 @@ private:
     HeapSort *heapSort;
 
     QLabel *dataNum, *timeConsumed, *compareTimes, *swapTimes, *layersNum;
-    QPushButton *startSortButton, *stepByStepButton, *stopAnimeButton, *resetButton;
+    QPushButton *startSortButton, *stepByStepButton, *stopAnimeButton, *resetButton, *inputDataButton;
     QPushButton *generateDataButton;
 
     QTimer* timer;
@@ -43,7 +43,9 @@ private:
 
 private slots:
     void generateData();
+    void inputData();
 signals:
+    void resetTree();
     void sendNums(const int &size, const QVector<int> &nums);
 
 };

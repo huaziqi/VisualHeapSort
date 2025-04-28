@@ -11,31 +11,12 @@ void HeapSort::acceptData(const int &size, const QVector<int> &nums){
     out.setDevice(file);
 }
 
-
-// << "void HeapSort::down(int u, int v){"
-//     << "    if(2 * u <= vectorSize && sortNums[2 * u] < sortNums[v])"
-//     << "        v = 2 * u;"
-//     << "    if(2 * u + 1 <= vectorSize && sortNums[2 * u + 1] < sortNums[v])"
-//     << "        v = 2 * u + 1;"
-//     << "    if(u != v){"
-//     << "        std::swap(sortNums[u], sortNums[v]);"
-//     << "        down(v, v);"
-//     << "    }"
-//     << "}"
-//     << "void HeapSort::heapSortA(){"
-//     << "    for(int i = vectorSize / 2; i >= 1; i --){"
-//     << "        down(i, i);"
-//     << "    }"
-//     << "    for(int i = 1; i <= vectorSize; i ++){"
-//     << "        sortNums[1] = sortNums[vectorSize];"
-//     << "        vectorSize --;"
-//     << "        down(1, 1);"
-//     << "    }"
-//     << "}";
 void HeapSort::stepedSort()
 {
     bool swap = false, contrast = false, tow = false, gotV = false, vSide = false, judge = false;
+    bool inDown = false;
     QString info = "";
+    qDebug() << step;
     switch(step){
     case enterHeap:
         emit codesId(10);
@@ -63,6 +44,7 @@ void HeapSort::stepedSort()
         downU = downV = loopI;
         info = "转到(" + QString::number(downU) + ")";
         step = enterDown;
+        qDebug() << 1;
         break;
     case loop_2:
         emit codesId(14);
@@ -153,6 +135,7 @@ void HeapSort::stepedSort()
         emit codesId(5);
         judge = true;
         gotV = downU == downV ? false :true;
+        tow = (downV == 2 * downU) ?  false : true;
         vSide = (gotV && downV == 2 * downU) ? false : true;
         info = "判断(" + QString::number(downU) + ")和(" + QString::number(downV) + ")是否相等";
         if(downU != downV){
@@ -179,12 +162,24 @@ void HeapSort::stepedSort()
         info = "转到(" + QString::number(downV) + ")";
         currentPoint = downV;
         downU = downV;
+        inDown = true;
         step = enterDown;
         break;
     case over:
         emit codesId(20);
+        break;
     }
-    emit paintInfo(currentPoint, sortNums, vectorSize, contrast, swap, tow, gotV , vSide, judge,info);
+    emit paintInfo(currentPoint, sortNums, vectorSize, contrast, swap, tow, gotV , vSide, judge, inDown, info);
+}
+
+void HeapSort::reset()
+{
+    step = enterHeap;
+
+    vectorSize = sortNums.size() - 1;
+    qDebug() << vectorSize;
+    stepedSort();
+    this->update();
 }
 
 
