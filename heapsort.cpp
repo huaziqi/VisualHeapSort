@@ -4,9 +4,11 @@ HeapSort::HeapSort(QWidget *parent)
     : QWidget{parent}
 {}
 
-void HeapSort::acceptData(const int &size, const QVector<int> &nums){
+void HeapSort::acceptData(const int &size, const QVector<int> &nums, int maxn){
     this->vectorSize = size;
     this->sortNums = nums;
+    this->maxn = maxn;
+    qDebug() << size << nums;
     file = new QFile("ans.txt");
     out.setDevice(file);
 }
@@ -16,7 +18,6 @@ void HeapSort::stepedSort()
     bool swap = false, contrast = false, tow = false, gotV = false, vSide = false, judge = false;
     bool inDown = false;
     QString info = "";
-    qDebug() << step;
     switch(step){
     case enterHeap:
         emit codesId(10);
@@ -169,7 +170,8 @@ void HeapSort::stepedSort()
         emit codesId(20);
         break;
     }
-    emit paintInfo(currentPoint, sortNums, vectorSize, contrast, swap, tow, gotV , vSide, judge, inDown, info);
+    if(step != over)
+        emit paintInfo(currentPoint, sortNums, vectorSize, contrast, swap, tow, gotV , vSide, judge, inDown, info, maxn);
 }
 
 void HeapSort::reset()

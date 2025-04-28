@@ -56,13 +56,14 @@ static constexpr auto qt_meta_stringdata_CLASSHeapSortENDCLASS = QtMocHelpers::s
     "judge",
     "inDown",
     "info",
+    "maxn",
     "acceptData",
     "stepedSort",
     "reset"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSHeapSortENDCLASS_t {
-    uint offsetsAndSizes[38];
+    uint offsetsAndSizes[40];
     char stringdata0[9];
     char stringdata1[8];
     char stringdata2[1];
@@ -79,9 +80,10 @@ struct qt_meta_stringdata_CLASSHeapSortENDCLASS_t {
     char stringdata13[6];
     char stringdata14[7];
     char stringdata15[5];
-    char stringdata16[11];
+    char stringdata16[5];
     char stringdata17[11];
-    char stringdata18[6];
+    char stringdata18[11];
+    char stringdata19[6];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSHeapSortENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -103,9 +105,10 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSHeapSortENDCLASS_t qt_meta_stri
         QT_MOC_LITERAL(91, 5),  // "judge"
         QT_MOC_LITERAL(97, 6),  // "inDown"
         QT_MOC_LITERAL(104, 4),  // "info"
-        QT_MOC_LITERAL(109, 10),  // "acceptData"
-        QT_MOC_LITERAL(120, 10),  // "stepedSort"
-        QT_MOC_LITERAL(131, 5)   // "reset"
+        QT_MOC_LITERAL(109, 4),  // "maxn"
+        QT_MOC_LITERAL(114, 10),  // "acceptData"
+        QT_MOC_LITERAL(125, 10),  // "stepedSort"
+        QT_MOC_LITERAL(136, 5)   // "reset"
     },
     "HeapSort",
     "codesId",
@@ -123,6 +126,7 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSHeapSortENDCLASS_t qt_meta_stri
     "judge",
     "inDown",
     "info",
+    "maxn",
     "acceptData",
     "stepedSort",
     "reset"
@@ -146,19 +150,19 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSHeapSortENDCLASS[] = {
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
        1,    1,   44,    2, 0x06,    1 /* Public */,
-       3,   11,   47,    2, 0x06,    3 /* Public */,
+       3,   12,   47,    2, 0x06,    3 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-      16,    2,   70,    2, 0x0a,   15 /* Public */,
-      17,    0,   75,    2, 0x0a,   18 /* Public */,
-      18,    0,   76,    2, 0x0a,   19 /* Public */,
+      17,    3,   72,    2, 0x0a,   16 /* Public */,
+      18,    0,   79,    2, 0x0a,   20 /* Public */,
+      19,    0,   80,    2, 0x0a,   21 /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    1,
-    QMetaType::Void, QMetaType::Int, 0x80000000 | 5, QMetaType::Int, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::QString,    4,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,
+    QMetaType::Void, QMetaType::Int, 0x80000000 | 5, QMetaType::Int, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::QString, QMetaType::Int,    4,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,   16,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::Int, 0x80000000 | 5,    7,    6,
+    QMetaType::Void, QMetaType::Int, 0x80000000 | 5, QMetaType::Int,    7,    6,   16,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -190,10 +194,12 @@ Q_CONSTINIT const QMetaObject HeapSort::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<bool, std::false_type>,
         QtPrivate::TypeAndForceComplete<bool, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
         // method 'acceptData'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<const int &, std::false_type>,
         QtPrivate::TypeAndForceComplete<const QVector<int> &, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
         // method 'stepedSort'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'reset'
@@ -209,8 +215,8 @@ void HeapSort::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         (void)_t;
         switch (_id) {
         case 0: _t->codesId((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 1: _t->paintInfo((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QList<int>>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[6])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[7])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[8])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[9])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[10])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[11]))); break;
-        case 2: _t->acceptData((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QList<int>>>(_a[2]))); break;
+        case 1: _t->paintInfo((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QList<int>>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[6])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[7])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[8])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[9])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[10])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[11])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[12]))); break;
+        case 2: _t->acceptData((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QList<int>>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
         case 3: _t->stepedSort(); break;
         case 4: _t->reset(); break;
         default: ;
@@ -243,7 +249,7 @@ void HeapSort::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
             }
         }
         {
-            using _t = void (HeapSort::*)(int , QVector<int> , int , bool , bool , bool , bool , bool , bool , bool , QString );
+            using _t = void (HeapSort::*)(int , QVector<int> , int , bool , bool , bool , bool , bool , bool , bool , QString , int );
             if (_t _q_method = &HeapSort::paintInfo; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 1;
                 return;
@@ -290,9 +296,9 @@ void HeapSort::codesId(int _t1)
 }
 
 // SIGNAL 1
-void HeapSort::paintInfo(int _t1, QVector<int> _t2, int _t3, bool _t4, bool _t5, bool _t6, bool _t7, bool _t8, bool _t9, bool _t10, QString _t11)
+void HeapSort::paintInfo(int _t1, QVector<int> _t2, int _t3, bool _t4, bool _t5, bool _t6, bool _t7, bool _t8, bool _t9, bool _t10, QString _t11, int _t12)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t4))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t5))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t6))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t7))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t8))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t9))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t10))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t11))) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t4))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t5))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t6))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t7))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t8))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t9))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t10))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t11))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t12))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 QT_WARNING_POP

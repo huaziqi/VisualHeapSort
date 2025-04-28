@@ -14,7 +14,7 @@ private:
     QRect textRect;
     QString someInfo;
     int size, currentPoint = 1;
-    int radius, scale;
+    int radius, scale, maxn;
     bool gotInfo = false;
     bool swap, contrast, tow, gotV, vSide, judge, inDown;
     double widgetWidth;
@@ -27,7 +27,7 @@ private:
 protected:
     void paintEvent(QPaintEvent *event);
 public slots:
-    void getInfo(int currentPoint, QVector<int> nums, int size, bool contrast, bool swap, bool tow, bool gotV, bool vSide, bool judge, bool inDown, QString info);
+    void getInfo(int currentPoint, QVector<int> nums, int size, bool contrast, bool swap, bool tow, bool gotV, bool vSide, bool judge, bool inDown, QString info, int maxn);
 
 signals:
 };

@@ -1,5 +1,6 @@
 #include "mainwidget.h"
 
+#define MAX 1000
 
 MainWidget::MainWidget(QWidget *parent)
     : QWidget(parent)
@@ -18,6 +19,8 @@ MainWidget::MainWidget(QWidget *parent)
     visualTreeArea->setWidget(visualTree);
     visualTree->resize(visualTreeArea->size());
 
+    connect(this, &MainWidget::sendNums, heapSort, &HeapSort::acceptData);
+
     initCodeLayout();
     initController();
     initTimer();
@@ -25,10 +28,10 @@ MainWidget::MainWidget(QWidget *parent)
     connect(heapSort, &HeapSort::paintInfo, visualTree, &VisualTree::getInfo);
     connect(stepByStepButton,  &QPushButton::clicked, heapSort, &HeapSort::stepedSort);
     connect(heapSort, &HeapSort::codesId, codeWidget, &CodeWIdget::acceptId);
-
     QFont font("", 14);
     this->setFont(font);
 
+    maxn = MAX;
 }
 
 MainWidget::~MainWidget() {}
@@ -121,6 +124,49 @@ void MainWidget::initController()
     fButtonLayout->addWidget(resetButton);
     controllerLayout->addLayout(sliderLayout);
 
+
+    msgBox.setText("确认导入");
+    msgBox.setStandardButtons(QMessageBox::Ok);
+
+    connect(inputDataButton, &QPushButton::clicked, this, [=]{
+
+        QUrl url("data.txt");
+        QDesktopServices::openUrl(url);
+        rec = msgBox.exec();
+        if(rec == QMessageBox::Ok){
+            qDebug() << 1;
+            QFile file("data.txt");
+            QTextStream in(&file);
+            if(file.open(QIODevice::ReadOnly)){
+                QString content = in.readAll();
+                qDebug() << content;
+                QVector<int> nums;
+                nums.append(-1);
+                int maxn = -10000;
+                bool flag = false;
+                for(int i = 0; i < content.length(); i ++){
+                    flag = false;
+                    int t = 0;
+                    if(content[i] == '-')
+                        flag = true, i ++;
+                    while(i < content.length() && content[i] != ' '){
+                        t = t * 10 + content[i].toLatin1() - '0';
+                        i ++;
+                    }
+                    if(flag)
+                        t *= -1;
+                    maxn = std::max(maxn, t);
+                    nums.append(t);
+                }
+                qDebug() << 1;
+                emit sendNums(nums.size() - 1, nums, maxn);
+                startSortButton->setDisabled(false);
+                stepByStepButton->setDisabled(false);
+                emit resetTree();
+            }
+            file.close();
+        }
+    });
     connect(resetButton, &QPushButton::clicked, this, [=]{
         emit resetTree();
     });
@@ -155,12 +201,13 @@ void MainWidget::initTimer()
 int MainWidget::generateRandom(){
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(1, 1000);
+    std::uniform_int_distribution<> dis(1, maxn);
     return dis(gen);
 }
 
 void MainWidget::generateData()
 {
+    maxn = MAX;
     QDialog* generateDataWindow = new QDialog(this);
     generateDataWindow->setFixedSize(300, 100);
     generateDataWindow->setModal(true);
@@ -189,7 +236,8 @@ void MainWidget::generateData()
     mainLayout->addWidget(finishLabel);
     mainLayout->addWidget(openFile);
     mainLayout->setAlignment(Qt::AlignTop);
-    connect(this, &MainWidget::sendNums, heapSort, &HeapSort::acceptData);
+
+
 
     connect(confirmBtn, &QPushButton::clicked, this, [=]{
         int length = inputNums->text().toInt();
@@ -202,13 +250,13 @@ void MainWidget::generateData()
                 nums.append(generateRandom());
                 out << nums[i] << " ";
             }
-            emit sendNums(length, nums);
+            emit sendNums(length, nums, maxn);
             finishLabel->setText("数据生成完成");
-            dataProvided = true;
             openFile->setDisabled(false);
             startSortButton->setDisabled(false);
             stepByStepButton->setDisabled(false);
             file.close();
+            emit resetTree();
         }
         else{
             qDebug() << "文件打开失败";

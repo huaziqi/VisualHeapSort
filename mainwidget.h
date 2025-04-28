@@ -26,6 +26,8 @@ private:
     QPushButton *startSortButton, *stepByStepButton, *stopAnimeButton, *resetButton, *inputDataButton;
     QPushButton *generateDataButton;
 
+    QMessageBox msgBox;
+    int rec, maxn;
     QTimer* timer;
     QSlider *timeSlider;
 
@@ -46,7 +48,7 @@ private slots:
     void inputData();
 signals:
     void resetTree();
-    void sendNums(const int &size, const QVector<int> &nums);
+    void sendNums(const int &size, const QVector<int> &nums, int maxn);
 
 };
 #endif // MAINWIDGET_H

@@ -133,7 +133,7 @@ void VisualTree::paintEvent(QPaintEvent *event)
     }
     fillWidth = widgetWidth;
     if(contrast || swap || judge)
-        fillWidth = 1.0 * nums[currentPoint] / 1000 * widgetWidth;
+        fillWidth = 1.0 * nums[currentPoint] / maxn * widgetWidth;
     if(swap)
         painter.fillRect(0, nowPainterPos.y() - (radius + stdLine / 2) * sqrt2, fillWidth, (2 * radius + stdLine) * sqrt2, colorList[(getLayer(currentPoint) + 1) % 3]);
     else
@@ -152,7 +152,7 @@ void VisualTree::paintEvent(QPaintEvent *event)
         nowPainterPos.setY(nowPainterPos.y() + sqrt2 * radius);
         fillWidth = widgetWidth;
         if((contrast || swap || judge)){
-            fillWidth = 1.0 * nums[currentPoint * 2] / 1000 * widgetWidth;
+            fillWidth = 1.0 * nums[currentPoint * 2] / maxn * widgetWidth;
             if (!tow){
                 if(swap)
                     painter.fillRect(0, nowPainterPos.y() - (radius + stdLine / 2) * sqrt2, fillWidth, (2 * radius + stdLine) * sqrt2, colorList[(getLayer(currentPoint * 2) - 1) % 3]);
@@ -176,7 +176,7 @@ void VisualTree::paintEvent(QPaintEvent *event)
         nowPainterPos.setY(nowPainterPos.y() + sqrt2 * radius);
         fillWidth = widgetWidth;
         if ((contrast || swap || judge)){
-            fillWidth = 1.0 * nums[currentPoint * 2 + 1] / 1000 * widgetWidth;
+            fillWidth = 1.0 * nums[currentPoint * 2 + 1] / maxn * widgetWidth;
             if (tow){
                 if(swap)
                     painter.fillRect(0, nowPainterPos.y() - (radius + stdLine / 2) * sqrt2, fillWidth, (2 * radius + stdLine) * sqrt2, colorList[(getLayer(currentPoint * 2) - 1)% 3]);
@@ -192,8 +192,9 @@ void VisualTree::paintEvent(QPaintEvent *event)
 }
 
 void VisualTree::getInfo(int currentPoint, QVector<int> nums, int size, bool contrast, bool swap, bool tow,\
-                         bool gotV, bool vSide, bool judge, bool inDown, QString info){
+                         bool gotV, bool vSide, bool judge, bool inDown, QString info, int maxn){
     gotInfo = true;
+    this->maxn = maxn;
     this->currentPoint = currentPoint;
     this->nums = nums;
     this->size = size;
