@@ -50,16 +50,7 @@ void HeapSort::stepedSort()
     case loop_2:
         emit codesId(14);
         currentPoint = 1;
-        if(vectorSize == 0){
-            step = over;
-            info = "结束排序，打开文件";
-            file->close();
-            QUrl url = QUrl::fromLocalFile("ans.txt");
-            if(!QDesktopServices::openUrl(url)){
-                qDebug() << "打开失败";
-            }
-            break;
-        }
+
         step = loopSet;
         break;
     case loopSet:
@@ -77,6 +68,16 @@ void HeapSort::stepedSort()
         break;
     case loopDown_2:
         emit codesId(17);
+        if(vectorSize == 0){
+            step = over;
+            info = "结束排序，打开文件";
+            file->close();
+            QUrl url = QUrl::fromLocalFile("ans.txt");
+            if(!QDesktopServices::openUrl(url)){
+                qDebug() << "打开失败";
+            }
+            break;
+        }
         info = "转到堆顶节点， 开始下沉";
         currentPoint = 1;
         downU = downV = 1;
@@ -160,6 +161,7 @@ void HeapSort::stepedSort()
         break;
     case downDown:
         emit codesId(7);
+
         info = "转到(" + QString::number(downV) + ")";
         currentPoint = downV;
         downU = downV;
@@ -167,11 +169,12 @@ void HeapSort::stepedSort()
         step = enterDown;
         break;
     case over:
-        emit codesId(20);
+        emit codesId(19);
+        info = "排序结束";
         break;
     }
-    if(step != over)
-        emit paintInfo(currentPoint, sortNums, vectorSize, contrast, swap, tow, gotV , vSide, judge, inDown, info, maxn);
+
+    emit paintInfo(currentPoint, sortNums, vectorSize, contrast, swap, tow, gotV , vSide, judge, inDown, info, maxn);
 }
 
 void HeapSort::reset()
