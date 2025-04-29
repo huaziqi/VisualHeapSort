@@ -90,6 +90,7 @@ void HeapSort::stepedSort()
         step = downJudge_1;
         break;
     case downJudge_1:
+        contrastTime ++;
         emit codesId(1);
         info = "判断 (" + QString::number(2 * downU) + ") 是否小于(" + QString::number(downV) + ")";
         contrast = true;
@@ -104,6 +105,7 @@ void HeapSort::stepedSort()
         }
     case downSetV_1:
         emit codesId(2);
+
         gotV = true;
         vSide = false;
         info = "确实小于，存储 2 * downU ";
@@ -111,6 +113,7 @@ void HeapSort::stepedSort()
         step = downJudge_2;
         break;
     case downJudge_2:
+        contrastTime ++;
         emit codesId(3);
         info = "判断 (" + QString::number(2 * downU + 1) + ") 是否小于 (" + QString::number(downV) + ") ";
         contrast = true;
@@ -151,6 +154,7 @@ void HeapSort::stepedSort()
         }
     case downSwap:
         emit codesId(6);
+        swapTime ++;
         swap = true;
         gotV = downU == downV ? false :true;
         vSide = (gotV && (downV == 2 * downU)) ? false : true;
@@ -173,14 +177,14 @@ void HeapSort::stepedSort()
         info = "排序结束";
         break;
     }
-
     emit paintInfo(currentPoint, sortNums, vectorSize, contrast, swap, tow, gotV , vSide, judge, inDown, info, maxn);
+    emit sortInfo(swapTime, contrastTime);
 }
 
 void HeapSort::reset()
 {
     step = enterHeap;
-
+    contrastTime = 0, swapTime = 0;
     vectorSize = sortNums.size() - 1;
     qDebug() << vectorSize;
     stepedSort();

@@ -28,6 +28,7 @@ private:
 
     QMessageBox msgBox;
     int rec, maxn;
+    int contrastTime, swapTime;
     QTimer* timer;
     QSlider *timeSlider;
 
@@ -44,6 +45,7 @@ private:
     int generateRandom();
 
 private slots:
+    void getHeapInfo(int swap, int contrast);
     void generateData();
     void inputData();
 signals:

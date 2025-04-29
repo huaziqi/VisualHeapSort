@@ -28,9 +28,12 @@ MainWidget::MainWidget(QWidget *parent)
     connect(heapSort, &HeapSort::paintInfo, visualTree, &VisualTree::getInfo);
     connect(stepByStepButton,  &QPushButton::clicked, heapSort, &HeapSort::stepedSort);
     connect(heapSort, &HeapSort::codesId, codeWidget, &CodeWIdget::acceptId);
+    connect(heapSort, &HeapSort::sortInfo, this, &MainWidget::getHeapInfo);
     QFont font("", 14);
     this->setFont(font);
 
+    compareTimes->setText("比较次数: " + QString::number(0));
+    swapTimes->setText("交换次数: " + QString::number(0));
     maxn = MAX;
 }
 
@@ -82,7 +85,7 @@ void MainWidget::initController()
     QVBoxLayout *sliderLayout = new QVBoxLayout();
     timeSlider = new QSlider(Qt::Vertical);
     timeSlider->setMaximumHeight(100);
-    QLabel* sliderLabel = new QLabel("动画速度");
+    QLabel* sliderLabel = new QLabel("播放间隔");
     sliderLayout->addWidget(timeSlider, 0, Qt::AlignHCenter);
     sliderLayout->addWidget(sliderLabel, 0, Qt::AlignHCenter);
 
@@ -139,7 +142,6 @@ void MainWidget::initController()
             QTextStream in(&file);
             if(file.open(QIODevice::ReadOnly)){
                 QString content = in.readAll();
-                qDebug() << content;
                 QVector<int> nums;
                 nums.append(-1);
                 int maxn = -10000;
@@ -158,10 +160,10 @@ void MainWidget::initController()
                     maxn = std::max(maxn, t);
                     nums.append(t);
                 }
-                qDebug() << 1;
                 emit sendNums(nums.size() - 1, nums, maxn);
                 startSortButton->setDisabled(false);
                 stepByStepButton->setDisabled(false);
+                dataNum->setText("数据量：" + QString::number(nums.size() - 1));
                 emit resetTree();
             }
             file.close();
@@ -203,6 +205,12 @@ int MainWidget::generateRandom(){
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(1, maxn);
     return dis(gen);
+}
+
+void MainWidget::getHeapInfo(int swap, int contrast)
+{
+    compareTimes->setText("比较次数: " + QString::number(contrast));
+    swapTimes->setText("交换次数: " + QString::number(swap));
 }
 
 void MainWidget::generateData()
@@ -256,6 +264,7 @@ void MainWidget::generateData()
             startSortButton->setDisabled(false);
             stepByStepButton->setDisabled(false);
             file.close();
+            dataNum->setText("数据量：" + QString::number(length));
             emit resetTree();
         }
         else{

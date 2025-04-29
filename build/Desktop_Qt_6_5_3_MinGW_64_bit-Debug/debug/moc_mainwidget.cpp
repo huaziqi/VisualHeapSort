@@ -48,12 +48,15 @@ static constexpr auto qt_meta_stringdata_CLASSMainWidgetENDCLASS = QtMocHelpers:
     "QList<int>",
     "nums",
     "maxn",
+    "getHeapInfo",
+    "swap",
+    "contrast",
     "generateData",
     "inputData"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSMainWidgetENDCLASS_t {
-    uint offsetsAndSizes[20];
+    uint offsetsAndSizes[26];
     char stringdata0[11];
     char stringdata1[10];
     char stringdata2[1];
@@ -62,8 +65,11 @@ struct qt_meta_stringdata_CLASSMainWidgetENDCLASS_t {
     char stringdata5[11];
     char stringdata6[5];
     char stringdata7[5];
-    char stringdata8[13];
-    char stringdata9[10];
+    char stringdata8[12];
+    char stringdata9[5];
+    char stringdata10[9];
+    char stringdata11[13];
+    char stringdata12[10];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSMainWidgetENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -77,8 +83,11 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSMainWidgetENDCLASS_t qt_meta_st
         QT_MOC_LITERAL(36, 10),  // "QList<int>"
         QT_MOC_LITERAL(47, 4),  // "nums"
         QT_MOC_LITERAL(52, 4),  // "maxn"
-        QT_MOC_LITERAL(57, 12),  // "generateData"
-        QT_MOC_LITERAL(70, 9)   // "inputData"
+        QT_MOC_LITERAL(57, 11),  // "getHeapInfo"
+        QT_MOC_LITERAL(69, 4),  // "swap"
+        QT_MOC_LITERAL(74, 8),  // "contrast"
+        QT_MOC_LITERAL(83, 12),  // "generateData"
+        QT_MOC_LITERAL(96, 9)   // "inputData"
     },
     "MainWidget",
     "resetTree",
@@ -88,6 +97,9 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSMainWidgetENDCLASS_t qt_meta_st
     "QList<int>",
     "nums",
     "maxn",
+    "getHeapInfo",
+    "swap",
+    "contrast",
     "generateData",
     "inputData"
 };
@@ -101,7 +113,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWidgetENDCLASS[] = {
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -109,18 +121,20 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWidgetENDCLASS[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   38,    2, 0x06,    1 /* Public */,
-       3,    3,   39,    2, 0x06,    2 /* Public */,
+       1,    0,   44,    2, 0x06,    1 /* Public */,
+       3,    3,   45,    2, 0x06,    2 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       8,    0,   46,    2, 0x08,    6 /* Private */,
-       9,    0,   47,    2, 0x08,    7 /* Private */,
+       8,    2,   52,    2, 0x08,    6 /* Private */,
+      11,    0,   57,    2, 0x08,    9 /* Private */,
+      12,    0,   58,    2, 0x08,   10 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int, 0x80000000 | 5, QMetaType::Int,    4,    6,    7,
 
  // slots: parameters
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,    9,   10,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -143,6 +157,10 @@ Q_CONSTINIT const QMetaObject MainWidget::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<const int &, std::false_type>,
         QtPrivate::TypeAndForceComplete<const QVector<int> &, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'getHeapInfo'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
         // method 'generateData'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'inputData'
@@ -159,8 +177,9 @@ void MainWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->resetTree(); break;
         case 1: _t->sendNums((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QList<int>>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
-        case 2: _t->generateData(); break;
-        case 3: _t->inputData(); break;
+        case 2: _t->getHeapInfo((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
+        case 3: _t->generateData(); break;
+        case 4: _t->inputData(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -212,13 +231,13 @@ int MainWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }

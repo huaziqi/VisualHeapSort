@@ -13,7 +13,6 @@ SOURCES += \
     heapsort.cpp \
     main.cpp \
     mainwidget.cpp \
-    visualbar.cpp \
     visualtree.cpp
 
 HEADERS += \
@@ -21,7 +20,6 @@ HEADERS += \
     common.h \
     heapsort.h \
     mainwidget.h \
-    visualbar.h \
     visualtree.h
 
 # Default rules for deployment.

@@ -34,6 +34,7 @@ private:
     QVector<int> sortNums;
     void heapSortA();
     void down(int u, int v);
+    int contrastTime, swapTime;
     Step step = enterHeap;
     int currentPoint, maxn;
     QFile* file;
@@ -43,6 +44,7 @@ public slots:
     void stepedSort();
     void reset();
 signals:
+    void sortInfo(int swap, int contrast);
     void codesId(int codesId);
     void paintInfo(int currentPoint, QVector<int> nums, int size, bool contrast, bool swap, bool tow, bool gotV, bool vSide, bool judge, bool inDown, QString info, int maxn);
 signals:
