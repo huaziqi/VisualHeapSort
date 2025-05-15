@@ -37,7 +37,7 @@ public:
     MainWidget(QWidget *parent = nullptr);
     ~MainWidget();
 protected:
-    virtual void resizeEvent(QResizeEvent *event) override;
+
 private:
     void initCodeLayout();
     void initController();

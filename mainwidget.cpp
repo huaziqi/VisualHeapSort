@@ -39,11 +39,7 @@ MainWidget::MainWidget(QWidget *parent)
 
 MainWidget::~MainWidget() {}
 
-void MainWidget::resizeEvent(QResizeEvent *event)
-{
-    visualTree->resize(visualTreeArea->size());
-    QWidget::resizeEvent(event);
-}
+
 
 void MainWidget::initCodeLayout()
 {
